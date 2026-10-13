@@ -90,3 +90,7 @@ python scripts/build_references.py --doi 10.1021/acs.nanolett.2c00778 --out refe
 - 付费墙论文拿不到出版商 PDF（通常返回 403）。绿色 OA 时免费版是预印本，skill 会交付预印本并说明来源，不会尝试绕过付费墙。
 - "原排版可编辑译文"在 Word 里是**结构等价**而非像素一致：图片浮动位置只能落在最接近其首次引用的位置；通栏图推页后页面底部可能留白（成因与处理见 `references/layout-docx.md`）。
 - 译文由模型产出。Sciverse 本身不翻译、不生成答案、不写综述，只提供证据。
+
+## 许可
+
+MIT，见 [LICENSE](LICENSE)。
