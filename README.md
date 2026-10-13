@@ -1,5 +1,7 @@
 # paper-search-translate
 
+[![validate-skill](https://github.com/FumizukiDoroneko/paper-search-translate/actions/workflows/validate-skill.yml/badge.svg)](https://github.com/FumizukiDoroneko/paper-search-translate/actions/workflows/validate-skill.yml)
+
 一个 Codex Skill。给定**研究方向 + 目标期刊**，自动定位候选论文、取回全文、产出译文（中英逐段对照，或"不修改排版的可编辑译文"）。
 
 English: a Codex skill that finds papers by research topic + venue, retrieves the full text, and delivers a Chinese translation (bilingual, or layout-preserving editable DOCX). Backed by Sciverse (retrieval), MinerU (PDF parsing fallback) and Crossref (reference rebuild).
@@ -64,11 +66,28 @@ paper-search-translate/
 ├── references/
 │   ├── sciverse-api.md           # Sciverse 端点、filters 结构、错误码、检索配方
 │   └── layout-docx.md            # "原排版可编辑译文"的完整工程链路
-└── scripts/
+├── scripts/
     ├── sciverse_search.mjs       # 两步检索：结构化圈定 -> 候选集合内语义排序
     ├── sciverse_content.mjs      # 按 doc_id 分页取全文 Markdown
-    └── build_references.py       # 按 DOI 从 Crossref 重建干净的参考文献表
+    ├── build_references.py       # 按 DOI 从 Crossref 重建干净的参考文献表
+    └── validate_skill.py         # 仓库校验（CI 用，非 skill 运行时依赖）
+├── examples/
+│   └── nb3cl8-walkthrough.md     # 一次真实跑通的完整记录
+└── .github/workflows/
+    └── validate-skill.yml        # push 时自动校验
 ```
+
+真正需要装进 Codex 的是前半部分（`SKILL.md`、`agents/`、`references/`、`scripts/` 里的三个工具脚本）；`examples/`、`.github/` 和 `validate_skill.py` 是仓库自带的工程配套，不影响 skill 运行。
+
+想先看实际效果，读 [examples/nb3cl8-walkthrough.md](examples/nb3cl8-walkthrough.md)：从检索候选到双栏可编辑译文，含真实命令输出、修掉的五处排版缺陷和差异比对结果。
+
+## 校验
+
+```bash
+python3 scripts/validate_skill.py .
+```
+
+检查 frontmatter 完整性、目录名与 `name` 是否一致、脚手架占位符残留、`SKILL.md` 里本地链接是否可解析，以及 `.mjs` / `.py` 的语法。只用标准库，无需安装依赖。CI 在每次 push 与 PR 时自动跑同一条命令。
 
 ## 脚本用法
 
