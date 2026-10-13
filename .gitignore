@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# 生成物：译文、渲染中间件、抓取的原文
+*.docx
+*.pdf
+*.png
+render/
+outputs/
+
+# 本地配置：绝不要把 token 提交进来
+config.local.*
+*.token
+.env
